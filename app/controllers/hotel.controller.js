@@ -1,5 +1,5 @@
 const { getHotelImages , setMainHotelImage, getHotelById } = require("../models/hotel.model.js");
-const { getAllRooms , updateRoomName , updateRoomImage} = require("../models/room.model.js")
+const { getAllRooms , updateRoomName , updateRoomImage, getRoomDetails} = require("../models/room.model.js")
 
 exports.getHotelImages = (req , res) => {
   const hotelid = req.params.hotelid
@@ -82,6 +82,19 @@ exports.updateRoomDetails = (req , res) => {
     const imageid = req.body.imageid
     
     updateRoomImage(roomid , imageid , (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving Screen."
+        });
+      else res.status(200).send(data);
+    });
+  };
+
+  exports.getRoomDetails = (req , res) => {
+    const roomid = req.params.roomid
+
+    getRoomDetails(roomid , (err, data) => {
       if (err)
         res.status(500).send({
           message:

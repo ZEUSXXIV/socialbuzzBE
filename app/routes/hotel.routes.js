@@ -12,6 +12,8 @@ module.exports = app => {
     router.patch("/rooms", hotel.updateRoomName)
 
     router.patch("/roomimage", hotel.updateRoomImage)
+
+    router.get("/room/:roomid", hotel.getRoomDetails)
     
 
     app.use('/api/hotel', router);

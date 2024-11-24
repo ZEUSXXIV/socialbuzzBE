@@ -60,11 +60,25 @@ const sql = require("./db.js");
     });
   };
 
+  const getRoomDetails = (roomid, callback) => {
+    const query = "CALL get_room_details_with_image_url(?)";
+    const params = [roomid];
+    sql.query(query, params, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        callback(err, null);
+        return;
+      } 
+  
+      callback(null, res);
+    });
+  };
 
 
 
 
 
 
-module.exports = {getAllRooms , setRoomDetails , updateRoomName, updateRoomImage };
+
+module.exports = {getAllRooms , setRoomDetails , updateRoomName, updateRoomImage , getRoomDetails};
   
